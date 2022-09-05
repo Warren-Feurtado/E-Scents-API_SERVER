@@ -20,8 +20,7 @@ exports.createAdmin = async (req, res) => {
       fName,
       lName,
       email,
-      password: hashPassword,
-      Photo,
+      password: hashPassword,     
     });
 
     JSONResponse.success(res, "Admin created successfully.", admin, 201);

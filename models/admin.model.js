@@ -20,10 +20,6 @@ let adminSchema = Schema({
         type: String,
         required: 'Enter a password',
         minLength: [4, 'Password Must be at least 4 characters long']
-    },
-    photo: {
-        type: String,
-        required: true
     }
 });
 
