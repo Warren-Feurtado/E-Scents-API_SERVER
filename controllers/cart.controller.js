@@ -34,7 +34,8 @@ exports.addCartItem = async (req, res, next) => {
 //DELETE A CART ITEM
 exports.deleteCartItem = async (req, res, next) => {
     try{
-        let cart = await Cart.findOneAndDelete(req.params.id);
+        console.log(req.params.id)
+        let cart = await Cart.findByIdAndDelete(req.params.id);
         JSONResponse.success(res, 'Cart Item deleted Successfully.', cart, 201);
     } catch(error) {
         JSONResponse.error(res, "Failure deleting Cart Item from Database.", error, 500);
