@@ -1,6 +1,6 @@
-const express = require('express');
+// const express = require('express');
 const Products = require('../models/product.model');
-const upload = require('../middleware/product-upload.middleware');
+// const upload = require('../middleware/product-upload.middleware');
 const { JSONResponse } = require('../lib/helper');
 // const db = require('mongoose');
 
@@ -54,12 +54,6 @@ exports.getMenColognes = async (req, res) => {
             $where: function(){
                 return this.gender === "Men";
             },
-            // $lookup: {
-            //     from: "brands",
-            //     localField: "brand",
-            //     foreignField: "_id",
-            //     as: "product_brand"
-            // },
         });
         JSONResponse.success(res, "Colognes retreived Successfully.", colognes, 200 );
     } catch(error){
@@ -98,6 +92,9 @@ exports.getUnisexFragrances = async (req, res) => {
 //EDIT AND UPDATE A PRODUCT "U"
 exports.UpdateProduct = async (req, res) => {
     try{
+        if(req.file){
+            req.body.imageSrc = req.file.path;
+        }
         const product = await Products.findByIdAndUpdate({_id: req.params.id}, req.body);
         JSONResponse.success(res, "Product Updated successfully.", {product, new: req.body}, 200);
     } catch(error){

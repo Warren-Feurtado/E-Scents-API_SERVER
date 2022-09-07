@@ -22,7 +22,7 @@ router.route('/unisex').get(getUnisexFragrances);
 
 router.route('/:id')
 .get(getProductById)
-.patch(UpdateProduct)
+.patch( UpdateProduct)
 .delete(deleteProduct);
 
 module.exports = router;
