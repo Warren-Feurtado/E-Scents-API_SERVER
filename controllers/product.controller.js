@@ -1,6 +1,4 @@
-// const express = require('express');
 const Products = require('../models/product.model');
-// const upload = require('../middleware/product-upload.middleware');
 const { JSONResponse } = require('../lib/helper');
 // const db = require('mongoose');
 

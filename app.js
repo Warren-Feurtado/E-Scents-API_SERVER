@@ -14,6 +14,7 @@ const productRouter = require('./routes/products.route');
 const brandRouter = require('./routes/brands.route');
 const adminRouter = require('./routes/admin.route');
 const cartRouter = require('./routes/cart.route');
+const subscriberRouter = require('./routes/subscriber.route');
 
 //EXPRESS MIDDLEWARE SETUP
 const app = express();
@@ -29,8 +30,8 @@ app.use('/public', express.static('public'));
 app.use('/products', productRouter);
 app.use('/brands', brandRouter);
 app.use('/admin', adminRouter);
-// app.use('/cart', cartRouter);
-app.use('/cart', cartRouter)
+app.use('/cart', cartRouter);
+app.use('/subscribers', subscriberRouter);
 
 //SERVER PORT SETUP
 const port = process.env.PORT || 2000;
