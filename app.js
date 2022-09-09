@@ -8,6 +8,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { mongoose } = require('./lib/db');
 const passport = require('passport');
+const path = require('path');
 
 //ROUTERS
 const productRouter = require('./routes/products.route');
@@ -23,7 +24,7 @@ app.use(passport.initialize());
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use('/public', express.static('public'));
+app.use('/public', express.static(path.join(__dirname,'public')));
 
 
 //ROUTES
