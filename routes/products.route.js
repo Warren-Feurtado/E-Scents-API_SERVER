@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express();
+const router = express.Router();
 const upload = require('../middleware/product-upload.middleware')
 const {
     getAllProducts,

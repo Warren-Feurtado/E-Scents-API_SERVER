@@ -1,4 +1,4 @@
-require('./config/passport.config')
+// require('./config/passport.config')
 
 require('dotenv/config');
 
@@ -15,16 +15,17 @@ const productRouter = require('./routes/products.route');
 const brandRouter = require('./routes/brands.route');
 const adminRouter = require('./routes/admin.route');
 const cartRouter = require('./routes/cart.route');
+const orderRouter = require('./routes/orders.route');
 const subscriberRouter = require('./routes/subscriber.route');
 
 //EXPRESS MIDDLEWARE SETUP
 const app = express();
 app.use(cors());
-app.use(passport.initialize());
-app.use(morgan('dev'));
+// app.use(passport.initialize());
+// app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use('/public', express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'public')));
 
 
 //ROUTES
@@ -32,6 +33,7 @@ app.use('/products', productRouter);
 app.use('/brands', brandRouter);
 app.use('/admin', adminRouter);
 app.use('/cart', cartRouter);
+app.use('/orders', orderRouter);
 app.use('/subscribers', subscriberRouter);
 
 //SERVER PORT SETUP

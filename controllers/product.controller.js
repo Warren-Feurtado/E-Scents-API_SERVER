@@ -5,9 +5,10 @@ const { JSONResponse } = require('../lib/helper');
 //ADD A NEW PRODUCT "C"
 exports.addNewProduct = async (req, res) => {
     try {
-        if(req.file){
-            req.body.imageSrc = req.file.path;
-        }
+
+        // req.body.imageSrc = req.body.imageSrc.replace('C:\\fakepath\\', 'public\\product-image\\')  // req.body.imageSrc = req.file.filename;
+            
+        console.log(req.body.imageSrc);
         const product = await Products.create(req.body);
         JSONResponse.success(res, 'Product added Successfully.', product, 201);
     } catch(error) {
@@ -27,7 +28,7 @@ exports.getAllProducts = async(req, res) => {
                 }
             },
         ]);
-        console.log(products);
+        // console.log(products);
         JSONResponse.success(res, 'Products Retreived Successfully.', products, 200);
     } catch(error) {
         JSONResponse.error(res, "Failure retreiving Products from Database.", error, 500);
