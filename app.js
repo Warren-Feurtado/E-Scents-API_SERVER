@@ -1,4 +1,3 @@
-// require('./config/passport.config')
 
 require('dotenv/config');
 
@@ -7,7 +6,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const { mongoose } = require('./lib/db');
-const passport = require('passport');
 const path = require('path');
 
 //ROUTERS
@@ -21,8 +19,7 @@ const subscriberRouter = require('./routes/subscriber.route');
 //EXPRESS MIDDLEWARE SETUP
 const app = express();
 app.use(cors());
-// app.use(passport.initialize());
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname,'public')));

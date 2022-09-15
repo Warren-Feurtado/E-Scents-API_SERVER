@@ -5,6 +5,20 @@ const { JSONResponse } = require('../lib/helper');
 
 
 //ADD A NEW BRAND "C"
+// exports.addNewBrand = async (req, res) => {
+//     try {
+//         if(req.file){
+//             req.body.logoSrc = req.file.path;
+            
+//         }
+//         const brand = await Brands.create(req.body);
+//         JSONResponse.success(res, 'Brand added Successfully.', brand, 201);
+//     } catch(error) {
+//         JSONResponse.error(res, "Failure Adding Brand to Database.", error, 500);
+//     }
+// };
+
+// Add a new brand to the database.
 exports.addNewBrand = async (req, res) => {
     try {
         if(req.file){

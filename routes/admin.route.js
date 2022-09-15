@@ -13,7 +13,8 @@ const {
 
 router.route('/')
 .get(getAllAdmins)
-.post(upload.single('photo'), createAdmin);
+.post(createAdmin);
+// .post(upload.single('photo'), createAdmin);
 
 router.route('/auth')
 .post(authenticateAdmin);

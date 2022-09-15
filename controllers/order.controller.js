@@ -2,6 +2,7 @@ const Orders = require('../models/order.model');
 const { JSONResponse } = require('../lib/helper');
 
 
+// Retreives all orders from the database.
 exports.getOrders = async(req, res) => {
     try {
         const orders = await Orders.find().populate('cartItems');
@@ -11,6 +12,7 @@ exports.getOrders = async(req, res) => {
     }
 };
 
+// Retreive an order by its Id.
 exports. getOrderById = async (req, res) => {
     try {
         const order = await Orders.findById({ _id: req.params.id }).populate('cartItems');
@@ -20,6 +22,7 @@ exports. getOrderById = async (req, res) => {
     }
 };
 
+// Creates a new Order in the database.
 exports.createOrder = async (req, res) => {
     try{
         const order = await Orders.create(req.body);
@@ -29,6 +32,7 @@ exports.createOrder = async (req, res) => {
     }
 };
 
+// Updates an order.
 exports.updateOrder = async (req, res) => {
     try{
         const order = await Orders.findByIdAndUpdate({_id: req.params.id}, req.body);
@@ -39,7 +43,7 @@ exports.updateOrder = async (req, res) => {
     }
 };
 
-
+// Delete an order from the database.
 exports.deleteOrder = async (req, res) => {
     try{
         const order = await Orders.findByIdAndRemove({_id: req.params.id});

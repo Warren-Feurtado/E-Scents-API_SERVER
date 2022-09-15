@@ -11,7 +11,8 @@ const {
 
 router.route('/')
 .get(getAllBrands)
-.post(upload.single('logoSrc'), addNewBrand);
+// .post(upload.single('logoSrc'), addNewBrand);
+.post(addNewBrand);
 
 router.route('/:id')
 .get(getBrandById)

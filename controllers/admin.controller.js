@@ -52,9 +52,18 @@ exports.getAdminById = async (req, res) => {
 //Update AND EDIT AN ADMIN "U"
 exports.updateAdmin = async (req, res) => {
   try {
+
+    const { fName, lName, email, password } = req.body;
+    const hashPassword = bcrypt.hashSync(password, 10);
+    
     const admin = await Admin.findByIdAndUpdate(
       { _id: req.params.id },
-      req.body
+      {
+        fName,
+        lName,
+        email,
+        password: hashPassword
+      }
     );
     JSONResponse.success(
       res,
@@ -76,23 +85,6 @@ exports.deleteAdmin = async (req, res) => {
     JSONResponse.error(res, "Error deleting Admin", error, 500);
   }
 };
-
-// exports.register = (req, res, next) => {
-//   var admin = new Admin();
-//   admin.fName = req.body.fName;
-//   admin.lName = req.body.lName;
-//   admin.email = req.body.email;
-//   admin.password = req.body.password;
-
-//   admin.save((err, doc) => {
-//     if (!err) res.send(doc);
-//     else {
-//       if (err.code == 11000)
-//         res.status(422).send("Duplicate Email Address found");
-//       else return next(err);
-//     }
-//   });
-// };
 
 exports.authenticateAdmin = async (req, res, next) => {
   let { email, password } = req.body;
@@ -130,15 +122,3 @@ exports.authenticateAdmin = async (req, res, next) => {
   });
 };
 
-// exports.authenticate = (req, res, next) => {
-//     console.log("Authentication");
-//     //Call for passport authentication
-//     passport.authenticate('local', (err, admin, info) => {
-//         //Error from passport middleware
-//         if (err) return res.status(400).json(err);
-//         //Registered Admin
-//         else if(admin) return res.status(200).json({"token": Admin.generateJwt()});
-//         //Unknown user or wrong password
-//         else return res.status(404).json(info);
-//     }) (req, res);
-// };

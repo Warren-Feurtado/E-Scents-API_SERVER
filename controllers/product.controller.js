@@ -3,12 +3,22 @@ const { JSONResponse } = require('../lib/helper');
 // const db = require('mongoose');
 
 //ADD A NEW PRODUCT "C"
+// exports.addNewProduct = async (req, res) => {
+//     try {
+
+//         req.body.imageSrc = req.body.imageSrc.replace('C:\\fakepath\\', 'public\\product-image\\')  
+//         // req.body.imageSrc = req.file.filename;
+            
+//         console.log(req.body.imageSrc);
+//         const product = await Products.create(req.body);
+//         JSONResponse.success(res, 'Product added Successfully.', product, 201);
+//     } catch(error) {
+//         JSONResponse.error(res, "Failure Adding Product to Database.", error, 500);
+//     }
+// };
+
 exports.addNewProduct = async (req, res) => {
     try {
-
-        // req.body.imageSrc = req.body.imageSrc.replace('C:\\fakepath\\', 'public\\product-image\\')  // req.body.imageSrc = req.file.filename;
-            
-        console.log(req.body.imageSrc);
         const product = await Products.create(req.body);
         JSONResponse.success(res, 'Product added Successfully.', product, 201);
     } catch(error) {
@@ -91,9 +101,9 @@ exports.getUnisexFragrances = async (req, res) => {
 //EDIT AND UPDATE A PRODUCT "U"
 exports.UpdateProduct = async (req, res) => {
     try{
-        if(req.file){
-            req.body.imageSrc = req.file.path;
-        }
+        // if(req.file){
+        //     req.body.imageSrc = req.file.path;
+        // }
         const product = await Products.findByIdAndUpdate({_id: req.params.id}, req.body);
         JSONResponse.success(res, "Product Updated successfully.", {product, new: req.body}, 200);
     } catch(error){

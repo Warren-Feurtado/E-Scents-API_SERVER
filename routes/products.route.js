@@ -14,7 +14,8 @@ const {
 
 router.route('/')
 .get(getAllProducts)
-.post(upload.single('imageSrc'), addNewProduct);
+// .post(upload.single('imageSrc'), addNewProduct);
+.post(addNewProduct);
 
 router.route('/men').get(getMenColognes);
 router.route('/women').get(getWomenPerfumes);
