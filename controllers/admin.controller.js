@@ -1,4 +1,5 @@
-require("dotenv/config");
+// require("dotenv/config");
+require("dotenv").config();
 const Admin = require("../models/admin.model");
 const { JSONResponse } = require("../lib/helper");
 const bcrypt = require("bcrypt");
@@ -93,22 +94,23 @@ exports.authenticateAdmin = async (req, res, next) => {
 
   try {
     existingAdmin = await Admin.findOne({ email: email });
-  } catch {
-    const error = new Error("Error finding admin");
-    return next(error);
+  } catch (err) {
+    console.error("Error finding admin: ", err);
+    // const error = new Error("Error finding admin");
+    return next(err);
   }
 
   if (!existingAdmin || !bcrypt.compareSync(password, existingAdmin.password)) {
-    const error = Error("Invalid password provided");
+    const error = new Error("Invalid password provided");
     return next(error);
   }
 
   try {
-    token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
+    token = jwt.sign({ _id: existingAdmin._id }, process.env.JWT_SECRET);
   } catch (err) {
-    console.log(err);
-    const error = new Error("Error generating access token");
-    return next(error);
+    console.error("Error generating access token: ", err);
+    // const error = new Error("Error generating access token");
+    return next(err);
   }
 
   existingAdmin = existingAdmin.toObject();
